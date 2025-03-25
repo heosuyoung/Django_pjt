@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% comment %} action : 요청 보낼 주소(url) {% endcomment %}
+{% comment %} ?기준으로 왼쪽이 url {% endcomment %}
+{% comment %} 오른쪽은 query string parameter {% endcomment %}
+<form action="https://search.naver.com/search.naver" method = 'GET'>
+    <label for="message">검색어를 입력하세요</label>
+    {% comment %} name='query' query(key값), input에 입력한 값(value값) {% endcomment %}
+    <input type="text" name='query'>
+
+    <input type="submit">
+</form>
+
+{% endblock content %}
