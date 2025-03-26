@@ -37,3 +37,9 @@ def catch(request):
     text = request.GET.get("throw")
     context = {"text": text}
     return render(request, "articles/catch.html", context)
+
+
+def detail(request, number):
+
+    context = {"number": number}
+    return render(request, "articles/detail.html", context)
