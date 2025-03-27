@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% for article in articles %}
+        <p>글 id : {{article.pk}}</p>
+        <p>글 제목 : {{article.title}}</p>
+        <p>글 내용 : {{article.content}}</p>
+        <p>글 생성 시간 : {{article.created_at}}</p>
+        <hr>
+
+    {% endfor %}
+
+{% endblock content %}

@@ -35,7 +35,7 @@ INSTALLED_APPS = [
     "articles",
     # 설치한 패키지
     "django_extensions",
-    # django가 기본적으로 제공하는 앱들
+    # django가 기본적으로 제공하는 앱들ㅔㅅㅅ
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -59,7 +59,10 @@ ROOT_URLCONF = "CRUD.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        # 경로 설정
+        "DIRS": [
+            BASE_DIR / "templates",
+        ],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
