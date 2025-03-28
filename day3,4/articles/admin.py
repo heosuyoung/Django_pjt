@@ -1,9 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
-
-# models.py로 부터 Board클래스
-from .models import Board
+# models.py로 부터 Board 클래스
+# . : 현재 디렉토리
+from .models import Article
 
 # admin site에 등록
-admin.site.register(Board)
+admin.site.register(Article)

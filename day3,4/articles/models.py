@@ -2,7 +2,7 @@ from django.db import models
 
 
 # Create your models here.
-class Board(models.Model):
+class Article(models.Model):
     # 제목은 글자 제한을 20글자
     # 왜 20글자 제한?-> 게시글 제목이 너무 길어지면 페이지 다 잡아먹음
     title = models.CharField(max_length=20)
