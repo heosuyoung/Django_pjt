@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>로그인 페이지</h2>
+
+  <!-- 기본 로그인 폼 -->
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">로그인</button>
+  </form>
+
+  <hr>
+
+  <!-- ✅ Google 로그인 버튼 -->
+  <a href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}">
+    <button type="button">Google 계정으로 로그인</button>
+  </a>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>{{ profile_user.username }}의 프로필</h2>
+
+{% if request.user != profile_user %}
+  <form action="{% url 'accounts:follow' profile_user.pk %}" method="POST">
+    {% csrf_token %}
+    <button type="submit">
+      {% if is_following %}
+        언팔로우
+      {% else %}
+        팔로우
+      {% endif %}
+    </button>
+  </form>
+{% endif %}
+
+<p>팔로워 수: {{ profile_user.followers.count }}</p>
+<p>팔로잉 수: {{ profile_user.following.count }}</p>
+
+<hr>
+
+<h3>작성한 게시글</h3>
+<ul>
+  {% for board in boards %}
+    <li>
+      <a href="{% url 'boards:detail' board.pk %}">{{ board.title }}</a>
+    </li>
+  {% empty %}
+    <li>작성한 게시글이 없습니다.</li>
+  {% endfor %}
+</ul>
+
+<h3>작성한 댓글</h3>
+<ul>
+  {% for comment in comments %}
+    <li>
+      [{{ comment.board.title }}] {{ comment.content }}
+    </li>
+  {% empty %}
+    <li>작성한 댓글이 없습니다.</li>
+  {% endfor %}
+</ul>
+{% endblock %}
