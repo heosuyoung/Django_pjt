@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}주식 댓글 분석기{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <div class="subtitle">주식에 대한, 투자자들의 목소리</div>
+  <h1 class="mb-4">📈 주식 댓글 분석기</h1>
+
+  <!-- 🔍 검색창 -->
+  <form method="POST" action="{% url 'stock_finder' %}" id="searchForm" class="mb-4">
+    {% csrf_token %}
+    <div class="row g-2 align-items-center">
+      <div class="col-md-8">
+        <input type="text" class="form-control" id="company" name="company_name"
+               placeholder="회사 이름을 입력하세요 (예: 삼성전자)"
+               value="{{ company_name|default:'' }}"
+               {% if is_loading %}readonly{% endif %}>
+      </div>
+      <div class="col-md-4">
+        {% if form_data %}
+          <input type="hidden" name="loading_step" value="{{ form_data.loading_step }}">
+        {% endif %}
+        <button type="submit" class="btn btn-primary w-100" {% if is_loading %}disabled{% endif %}>🔍 검색</button>
+      </div>
+    </div>
+  </form>
+
+  <!-- ✅ 로딩 중일 때 -->
+  {% if is_loading %}
+    {% if loading_step == 'selenium' %}
+    <div class="d-flex align-items-center mt-4">
+      <div class="spinner-border text-primary me-3" role="status">
+        <span class="visually-hidden">로딩 중...</span>
+      </div>
+      <div>
+        <strong>"{{ company_name }}"</strong> 데이터 수집 및 분석 중입니다.<br>
+        잠시만 기다려주세요...
+      </div>
+    </div>
+
+    <!-- 자동 재요청 -->
+    <form method="POST" action="{% url 'stock_finder' %}" id="progressForm">
+      {% csrf_token %}
+      <input type="hidden" name="company_name" value="{{ company_name }}">
+      <input type="hidden" name="loading_step" value="selenium">
+    </form>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() {
+          document.getElementById('progressForm').submit();
+        }, 1000);
+      });
+    </script>
+    {% endif %}
+  {% else %}
+
+    <!-- ❗ 오류 메시지 표시 -->
+    {% if error_message %}
+      <div class="alert alert-danger mt-3" role="alert">
+        {{ error_message }}
+      </div>
+    {% endif %}
+
+    {% if company_name %}
+      <h2 class="mt-4">{{ company_name }} {% if stock_code %}({{ stock_code }}){% endif %}</h2>
+
+      <!-- 📌 관심 종목 등록 -->
+      {% if user.is_authenticated %}
+      <form method="POST" action="{% url 'add_stock' %}" class="mb-3">
+        {% csrf_token %}
+        <input type="hidden" name="stock_name" value="{{ company_name }}">
+        <button type="submit" class="btn btn-outline-primary">📌 관심 종목에 추가</button>
+      </form>
+      {% endif %}
+
+      <!-- 💬 댓글 목록 -->
+      {% if comments %}
+        <h4 class="mt-4">🗣 수집된 댓글</h4>
+        <ul class="list-group mb-4">
+          {% for comment in comments %}
+          <li class="list-group-item d-flex justify-content-between align-items-start">
+            {{ comment }}
+            <form method="POST" action="{% url 'delete_comment' %}" style="display: inline;">
+              {% csrf_token %}
+              <input type="hidden" name="stock_code" value="{{ stock_code }}">
+              <input type="hidden" name="comment_index" value="{{ forloop.counter0 }}">
+              <button type="submit" class="btn btn-sm btn-danger ms-2">삭제</button>
+            </form>
+          </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+
+      <!-- 🤖 GPT 분석 결과 -->
+      {% if chatgpt_response %}
+        <h4>🤖 GPT 분석 결과</h4>
+        <div class="card p-3 bg-light border mb-5">
+          <p class="mb-0">{{ chatgpt_response }}</p>
+        </div>
+      {% endif %}
+    {% endif %}
+  {% endif %}
+</div>
+{% endblock %}

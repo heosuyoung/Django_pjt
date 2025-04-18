@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}내 관심 종목{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2 class="mb-4">{{ user.username }}님의 관심 종목</h2>
+
+  <div class="card shadow-sm rounded">
+    <ul class="list-group list-group-flush">
+      {% for stock in stocks %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <!-- 🔗 종목 클릭 시 분석 POST 요청 -->
+          <form method="POST" action="{% url 'stock_finder' %}" class="m-0">
+            {% csrf_token %}
+            <input type="hidden" name="company_name" value="{{ stock.name }}">
+            <input type="hidden" name="loading_step" value="">
+            <button type="submit" class="btn btn-link text-decoration-none text-primary">{{ stock.name }}</button>
+          </form>
+
+          <!-- 🗑 삭제 버튼 -->
+          <a href="{% url 'delete_stock' stock.id %}" class="btn btn-sm btn-outline-danger">삭제</a>
+        </li>
+      {% empty %}
+        <li class="list-group-item">아직 관심 종목이 없습니다.</li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}
