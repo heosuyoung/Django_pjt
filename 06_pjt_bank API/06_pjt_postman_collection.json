@@ -1,0 +1,135 @@
+{
+  "info": {
+    "name": "06_PJT Finlife API Test",
+    "_postman_id": "a1b2c3d4-5678-90ef-ghij-klmnopqrstuv",
+    "description": "금융상품정보 API 서버 기능 테스트용 Postman Collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "A. Save Deposit Products",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:8000/finlife/save-deposit-products/",
+          "protocol": "http",
+          "host": [
+            "127.0.0.1"
+          ],
+          "port": "8000",
+          "path": [
+            "finlife",
+            "save-deposit-products"
+          ]
+        }
+      }
+    },
+    {
+      "name": "B. Get All Products",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:8000/finlife/deposit-products/",
+          "protocol": "http",
+          "host": [
+            "127.0.0.1"
+          ],
+          "port": "8000",
+          "path": [
+            "finlife",
+            "deposit-products"
+          ]
+        }
+      }
+    },
+    {
+      "name": "C. Post New Product",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"fin_prdt_cd\": \"TEST001\",\n  \"kor_co_nm\": \"SSAFY은행\",\n  \"fin_prdt_nm\": \"구레잇9기예금\",\n  \"etc_note\": \"자유\",\n  \"join_deny\": 1,\n  \"join_member\": \"실명의 개인\",\n  \"join_way\": \"스마트폰\",\n  \"spcl_cnd\": \"해당사항 없음\"\n}"
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/finlife/deposit-products/",
+          "protocol": "http",
+          "host": [
+            "127.0.0.1"
+          ],
+          "port": "8000",
+          "path": [
+            "finlife",
+            "deposit-products"
+          ]
+        }
+      }
+    },
+    {
+      "name": "D. Get Options by Product Code",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:8000/finlife/deposit-product-options/WR0001B/",
+          "protocol": "http",
+          "host": [
+            "127.0.0.1"
+          ],
+          "port": "8000",
+          "path": [
+            "finlife",
+            "deposit-product-options",
+            "WR0001B"
+          ]
+        }
+      }
+    },
+    {
+      "name": "E. Get Top Rate Product",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:8000/finlife/deposit-products/top-rate/",
+          "protocol": "http",
+          "host": [
+            "127.0.0.1"
+          ],
+          "port": "8000",
+          "path": [
+            "finlife",
+            "deposit-products",
+            "top-rate"
+          ]
+        }
+      }
+    },
+    {
+      "name": "F. Get Dummy Data",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:8000/finlife/dummy-data/",
+          "protocol": "http",
+          "host": [
+            "127.0.0.1"
+          ],
+          "port": "8000",
+          "path": [
+            "finlife",
+            "dummy-data"
+          ]
+        }
+      }
+    }
+  ]
+}
