@@ -1,0 +1,12 @@
+# node.js 환경을 고려한 일반적 예시 포함
+node_modules/
+dist/
+.env
+apikey.js     # ✅ 민감 정보 제외
+
+# OS별
+.DS_Store
+Thumbs.db
+
+# VSCode
+.vscode/

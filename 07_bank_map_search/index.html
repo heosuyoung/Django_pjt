@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>은행 검색</title>
+
+  <!-- API 및 데이터 연결 -->
+  <script src="apikey.js"></script>
+  <script src="data.js"></script>
+  <script defer src="main.js"></script>
+
+  <!-- 스타일 개선 -->
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f6f6f6;
+    }
+
+    #search-box {
+      width: 300px;
+      padding: 20px;
+      background-color: white;
+      border-right: 1px solid #ddd;
+      height: 100vh;
+      box-sizing: border-box;
+      float: left;
+      box-shadow: 2px 0 5px rgba(0,0,0,0.05);
+    }
+
+    #map {
+      margin-left: 300px;
+      height: 100vh;
+    }
+
+    h2 {
+      font-size: 22px;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    select, button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      background-color: #fff;
+      transition: border-color 0.3s;
+    }
+
+    select:focus, button:focus {
+      border-color: #3399ff;
+      outline: none;
+    }
+
+    button {
+      background-color: #3399ff;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #2677cc;
+    }
+  </style>
+</head>
+<body>
+  <div id="search-box">
+    <h2>🏦 은행 검색</h2>
+    <select id="sido"></select>
+    <select id="sigungu"></select>
+    <select id="bank"></select>
+    <button onclick="searchBanks()">🔍 찾기</button>
+  </div>
+  <div id="map"></div>
+</body>
+</html>
