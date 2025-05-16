@@ -18,7 +18,13 @@
             allowfullscreen
           ></iframe>
           <p>
-            <router-link :to="`/detail/${video.id.videoId}`">
+            <router-link
+              :to="{
+                name: 'detail',
+                params: { id: video.id.videoId },
+                query: { channel: video.snippet.channelTitle }
+              }"
+            >
               {{ video.snippet.title }}
             </router-link>
           </p>

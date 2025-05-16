@@ -6,6 +6,8 @@
         <router-link to="/">🏠 홈</router-link> |
         <router-link to="/search">🔍 검색</router-link> |
         <router-link to="/watch-later">⭐ 나중에 볼 영상</router-link>
+        <RouterLink to="/channels">⭐ 좋아하는 채널</RouterLink>
+
       </nav>
     </header>
 
